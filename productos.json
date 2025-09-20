@@ -1,0 +1,16 @@
+[
+  {
+    "id": "item-1",
+    "nombre": "Licuadora Philips",
+    "descripcion": "Funciona perfecto, poco uso.",
+    "precio": 3500,
+    "imagen": "assets/images/item-1.jpg"
+  },
+  {
+    "id": "item-2",
+    "nombre": "Silla de escritorio",
+    "descripcion": "Con ruedas y respaldo ergonómico.",
+    "precio": 12000,
+    "imagen": "assets/images/item-2.jpg"
+  }
+]
