@@ -14,51 +14,37 @@
 
     <nav>
         <a href="index.html">Inicio</a>
-        <a href="#articulos">Ver Artículos</a>
+        <a href="#catalogo">Ver Artículos</a>
         <!-- Podrías añadir enlaces a categorías aquí, ej: <a href="electronica.html">Electrónica</a> -->
     </nav>
 
-    <main id="articulos">
-        <h2>Artículos Destacados</h2>
-        <div class="item"/>
-    </main>
+    <main id="catalogo" class="grid"></main>
 
     <script>
-    // JSON embebido con los productos
-    const productos = [
-      {
-        id: "item-1",
-        nombre: "Licuadora Philips",
-        descripcion: "Funciona perfecto, poco uso.",
-        precio: 3500,
-        imagen: "images/camara-vintage.png"
-      },
-      {
-        id: "item-2",
-        nombre: "Silla de escritorio",
-        descripcion: "Con ruedas y respaldo ergonómico.",
-        precio: 12000,
-        imagen: "images/camara-vintage.png"
-      }
-      // 👉 Agregá más productos acá
-    ];
+    async function cargarProductos() {
+      try {
+        const resp = await fetch("productos.json");
+        const productos = await resp.json();
+        const catalogo = document.getElementById("catalogo");
     
-    // Render dinámico
-    const articulos = document.getElementById("articulos");
-    
-    productos.forEach(p => {
-      const card = document.createElement("div");
-      card.className = "item";
-      card.innerHTML = `
+        productos.forEach(p => {
+          const card = document.createElement("article");
+          card.className = "card";
+          card.innerHTML = `
             <h3>${p.nombre}</h3>
             <img src="${p.imagen}" alt="${p.nombre}" width="300">
             <p>${p.descripcion}</p>
             <p><strong>Precio:</strong> $${p.precio.toLocaleString('es-AR')}</p>
             <a href="items/${p.id}.html">Ver detalle</a>
             <a class="whatsapp" href="https://wa.me/5492216161629?text=Hola%2C%20me%20interesa%20el%20${encodeURIComponent(p.nombre)}">WhatsApp</a>
-      `;
-      articulos.appendChild(card);
-    });
+          `;
+          catalogo.appendChild(card);
+        });
+      } catch (err) {
+        console.error("Error cargando productos:", err);
+      }
+    }
+    cargarProductos();
     </script>
     <footer>
         <p>&copy; 2023 Mi Venta de Garaje. Contacto: tu-email@example.com</p>
