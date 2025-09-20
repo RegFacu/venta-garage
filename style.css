@@ -68,7 +68,7 @@ main {
     margin-top: 10px;
 }
 
-.item a .whatsapp {
+.item a.whatsapp {
     background-color: #25D366
     color: #000;
 }
