@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles: Cámara Vintage</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>Cámara Vintage</h1>
+    </header>
+
+    <nav>
+        <a href="index.html">Volver a la Venta de Garaje</a>
+    </nav>
+
+    <div class="wrap" id="detalle">Cargando producto...</div>
+
+    <script>
+    async function cargarDetalle() {
+      try {
+        const resp = await fetch("productos.json");
+        const productos = await resp.json();
+    
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get("id");
+        const producto = productos.find(p => p.id === id);
+    
+        const cont = document.getElementById("detalle");
+    
+        if (producto) {
+          cont.innerHTML = `
+                <div class="item-detail">
+                    <img src="${producto.imagen}" alt="${producto.nombre}">
+                    <h3>${producto.nombre}</h3>
+                    <p><strong>Descripción:</strong>${producto.descripcion}</p>
+                    <p><strong>Precio:</strong> $${producto.precio.toLocaleString('es-AR')}</p>
+                    <a class="whatsapp" href="https://wa.me/5492216161629?text=Hola%2C%20me%20interesa%20el%20${encodeURIComponent(p.nombre)}">WhatsApp</a>
+                </div>
+          `;
+        } else {
+          cont.innerHTML = `<p>Producto no encontrado.</p>`;
+        }
+      } catch (err) {
+        console.error("Error cargando detalle:", err);
+      }
+    }
+    cargarDetalle();
+    </script>
+
+    <footer>
+        <p>&copy; 2023 Mi Venta de Garaje.</p>
+    </footer>
+</body>
+</html>
