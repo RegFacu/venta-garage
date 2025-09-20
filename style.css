@@ -68,6 +68,11 @@ main {
     margin-top: 10px;
 }
 
+.item a .whatsapp {
+    background-color: #25D366
+    color: #000;
+}
+
 .item a:hover {
     background-color: #0056b3;
 }
